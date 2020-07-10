@@ -3,7 +3,7 @@
 .circleci
 .github
 configurations/
-cypress/
+demo/
 scripts/
 src/
 .browserslistrc
@@ -18,6 +18,7 @@ src/
 .prettierrc.js
 babel.config.js
 commitlint.config.js
+dot-notation.png
 cypress.json
 jest.config.js
 release.config.js

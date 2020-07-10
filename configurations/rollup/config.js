@@ -6,7 +6,7 @@ const pkg = require('../../package.json');
 const pkgName = 'dot';
 const global = [...Object.keys(pkg.dependencies)];
 
-module.exports.pkgName = pkgName;
+
 module.exports = {
   input: './lib/index.js',
   output: {
