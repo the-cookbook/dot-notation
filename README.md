@@ -1,5 +1,5 @@
 # @cookbook/dot-notation
-> Typescript Library kick-off.
+> Object readings and complex transformations made easy by using `dot.notation.syntax[]`
 
 [![NPM Version][npm-image]][npm-url]
 [![CI Status][circleci-image]][circleci-url]
