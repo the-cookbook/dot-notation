@@ -17,7 +17,7 @@
 
 Play around with _dot-notation_ and experience **the magic**!
 
-[![Edit @cookbook/dot-notation](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/arg-defdot-notation-td636?fontsize=14&hidenavigation=1&theme=dark)
+[![Edit @cookbook/dot-notation](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/cookbookdot-notation-kjwd2?fontsize=14&hidenavigation=1&theme=dark)
 
 ## Installation
 
@@ -157,9 +157,9 @@ dot.parseKey(path, value);
 ```
 
 <!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/{PACKAGE_NAMESPACE}.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/{PACKAGE_NAMESPACE}
-[npm-downloads]: https://img.shields.io/npm/dm/{PACKAGE_NAMESPACE}.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/@cookbook/dot-notation.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@cookbook/dot-notation
+[npm-downloads]: https://img.shields.io/npm/dm/@cookbook/dot-notation.svg?style=flat-square
 [circleci-image]: https://circleci.com/gh/the-cookbook/dot-notation.svg?style=svg
 [circleci-url]: https://circleci.com/gh/the-cookbook/dot-notation
 [stars-image]: https://img.shields.io/github/stars/the-cookbook/dot-notation.svg
@@ -167,10 +167,10 @@ dot.parseKey(path, value);
 [vulnerabilities-image]: https://snyk.io/test/github/the-cookbook/dot-notation/badge.svg
 [vulnerabilities-url]: https://snyk.io/test/github/the-cookbook/dot-notation
 [issues-image]: https://img.shields.io/github/issues/the-cookbook/dot-notation.svg
-[issues-url]: https://github.com/cthe-ookbook/navigator/issues
+[issues-url]: https://github.com/the-cookbook/dot-notation/issues
 [awesome-image]: https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg
 [awesome-url]: https://github.com/the-cookbook/dot-notation
-[install-size-image]: https://packagephobia.now.sh/badge?p={PACKAGE_NAMESPACE}
-[install-size-url]: https://packagephobia.now.sh/result?p={PACKAGE_NAMESPACE}
-[gzip-size-image]: http://img.badgesize.io/https://unpkg.com/{PACKAGE_NAMESPACE}/lib/navigator.min.js?compression=gzip
-[gzip-size-url]: https://unpkg.com/{PACKAGE_NAMESPACE}/lib/navigator.min.js
+[install-size-image]: https://packagephobia.now.sh/badge?p=@cookbook/dot-notation
+[install-size-url]: https://packagephobia.now.sh/result?p=@cookbook/dot-notation
+[gzip-size-image]: http://img.badgesize.io/https://unpkg.com/@cookbook/dot-notation/lib/dot.min.js?compression=gzip
+[gzip-size-url]: https://unpkg.com/@cookbook/dot-notation/lib/dot.min.js
