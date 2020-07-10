@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
+import is from "@cookbook/dot-notation/utils/is";
 
 interface Formatter {
   title?: string;
@@ -9,9 +10,7 @@ interface Formatter {
 const Formatter: React.FunctionComponent<Formatter> = (props: Formatter) => {
   const { title, source } = props;
 
-  if (!Object.keys(source).length) {
-    return null;
-  }
+  const shouldFormat = is.array(source) || is.object(source);
 
   return (
     <div style={{ marginBottom: 42 }}>
@@ -24,7 +23,8 @@ const Formatter: React.FunctionComponent<Formatter> = (props: Formatter) => {
           borderRadius: '4px',
         }}
       >
-        <ReactJson src={source} />
+        {!shouldFormat && source}
+        {shouldFormat && <ReactJson src={source} name={null} />}
       </div>
     </div>
   );

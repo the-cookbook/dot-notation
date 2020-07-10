@@ -1,6 +1,10 @@
 import toArray from './to-array';
 
 describe('utils/toArray()', () => {
+  it('should match snapshot', () => {
+    expect(toArray).toMatchSnapshot();
+  });
+
   it('should parse type to array', () => {
     const source = 'lorem ipsum';
     const expected = [source];

@@ -5,7 +5,7 @@
     "rootDir": "./",
     "outDir": "./build",
     "paths": {
-      "@cookbook/navigator": ["../src/*"]
+      "@cookbook/dot-notation": ["../src/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

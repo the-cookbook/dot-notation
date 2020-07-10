@@ -1,4 +1,11 @@
-/* eslint-disable filenames/match-exported */
-import HelloWorld from './hello-world';
+import pick from './pick';
+import parse from './parse';
+import parseKey from './parse-key';
 
-export default HelloWorld;
+export { pick, parse, parseKey };
+
+export default {
+  pick,
+  parse,
+  parseKey,
+};

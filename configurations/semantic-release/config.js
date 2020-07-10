@@ -1,3 +1,5 @@
+const pkgName = require('../rollup').pkgName;
+
 module.exports = {
   branches: [
     { name: 'master' },
@@ -18,7 +20,7 @@ module.exports = {
     [
       '@semantic-release/github',
       {
-        assets: [{ path: 'release/*.tgz' }, { path: 'lib/navigator.min.js*(.map)', label: 'UMD build minified' }],
+        assets: [{ path: 'release/*.tgz' }, { path: `lib/${pkgName}.min.js*(.map)`, label: 'UMD build minified' }],
       },
     ],
     [

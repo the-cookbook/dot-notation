@@ -15,7 +15,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.mjs', '.json'],
     modules: [path.resolve(__dirname, '../../', appSource), 'node_modules'],
     alias: {
-      '@cookbook/navigator': path.resolve(__dirname, '../../src'),
+      '@cookbook/dot-notation': path.resolve(__dirname, '../../src'),
     },
   },
   target: 'web',

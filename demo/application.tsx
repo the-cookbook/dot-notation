@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Root from './screens/root';
+import Playground from './screens/playground';
 
-ReactDOM.render(<Root />, document.getElementById('root'));
+ReactDOM.render(<Playground />, document.getElementById('root'));

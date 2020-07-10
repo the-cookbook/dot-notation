@@ -70,8 +70,10 @@ body {
   cursor: pointer;
 }
 
+.menu-container > ul > li.active,
 .menu-container > ul > li:hover,
-.menu-category > li:hover {
+.menu-category > li:hover,
+.menu-category > li.active {
   background-color: thistle;
 }
 

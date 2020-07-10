@@ -28,6 +28,7 @@ module.exports = function (api) {
         plugins: ['dynamic-import-node'],
       },
       production: {
+        comments: false,
         plugins: [
           [
             'transform-remove-console',

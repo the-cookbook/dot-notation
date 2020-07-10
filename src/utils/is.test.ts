@@ -1,6 +1,10 @@
 import is from './is';
 
 describe('utils/is', () => {
+  it('should match snapshot', () => {
+    expect(is).toMatchSnapshot();
+  });
+
   describe('is.nullOrUndefined()', () => {
     it('should flag data type correctly', () => {
       expect(is.nullOrUndefined(null)).toBe(true);
@@ -10,52 +14,25 @@ describe('utils/is', () => {
     });
   });
 
-  describe('is.externalUrl()', () => {
-    let spyOnWindow: jest.SpyInstance;
-
-    beforeEach(() => {
-      spyOnWindow = jest.spyOn(global, 'window', 'get');
-
-      spyOnWindow.mockImplementation(() => ({
-        location: {
-          href: 'http://localhost/',
-        },
-      }));
-    });
-
-    const assertion: Record<string, boolean> = {
-      'www.google.com': true,
-      'http://www.google.com': true,
-      'https://www.google.com': true,
-      '/article/lorem-ipsum-et-delores': false,
-      'article/lorem-ipsum-et-delores': false,
-      '/': false,
-    };
-
-    Object.keys(assertion).forEach((key) => {
-      it(`should flag "${key}" string as ${assertion[key]}`, () => {
-        expect(is.externalUrl(key)).toBe(assertion[key]);
-      });
+  describe('is.object()', () => {
+    it(`should flag element data type correctly`, () => {
+      expect(is.object({})).toBe(true);
+      expect(is.object([])).toBe(false);
+      expect(is.object(1)).toBe(false);
+      expect(is.object(true)).toBe(false);
+      expect(is.object(null)).toBe(false);
+      expect(is.object('cd ..')).toBe(false);
     });
   });
 
-  describe('is.absoluteUrl()', () => {
-    const assertion: { [key: string]: boolean } = {
-      'http://www.google.com;': true,
-      'https://www.google.com;': true,
-      'file://localhost/etc/fstab': true,
-      'mailto:email@email.com': true,
-      // eslint-disable-next-line no-script-url
-      'javascript: void(0);': true,
-      '/article/lorem-ipsum-et-delores': false,
-      'article/lorem-ipsum-et-delores': false,
-      '/': false,
-    };
-
-    Object.keys(assertion).forEach((key) => {
-      it(`should flag "${key}" string as ${assertion[key]}`, () => {
-        expect(is.absoluteUrl(key)).toBe(assertion[key]);
-      });
+  describe('is.array()', () => {
+    it(`should flag element data type correctly`, () => {
+      expect(is.array([])).toBe(true);
+      expect(is.array({})).toBe(false);
+      expect(is.array(1)).toBe(false);
+      expect(is.array(true)).toBe(false);
+      expect(is.array(null)).toBe(false);
+      expect(is.array('cd ..')).toBe(false);
     });
   });
 });
