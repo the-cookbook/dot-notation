@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`screens/<Root /> should match snapshot 1`] = `
+<div
+  className="container-fluid container full-height"
+>
+  <div
+    className="row full-height"
+  >
+    <div
+      className="content"
+    >
+      <div
+        className="content-wrapper full-height"
+      />
+    </div>
+  </div>
+</div>
+`;

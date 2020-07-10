@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./",
+    "outDir": "./build",
+    "paths": {
+      "@cookbook/navigator": ["../src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}
