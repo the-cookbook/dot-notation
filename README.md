@@ -53,10 +53,10 @@ const source = {
 };
 
 dot.pick(source, 'person.name');
-//outputs { firstName: 'John', lastName: 'Doe' }
+//output { firstName: 'John', lastName: 'Doe' }
 
 dot.pick(source, 'person.address[0].street');
-//outputs "Infinite Loop"
+//output "Infinite Loop"
 ```
 
 ### Parsing an object
@@ -76,7 +76,7 @@ const source = {
 
 dot.parse(source);
 
-/* outputs
+/* output
 {
   person: {
     name: {
@@ -116,7 +116,7 @@ const source = {
 
 dot.parse(source);
 
-/* outputs
+/* output
 [
  {
   "postalCode": 95014,
@@ -147,7 +147,7 @@ const value = 'John Doe';
 
 dot.parseKey(path, value);
 
-/* outputs
+/* output
 {
   person: {
     name: 'John Doe',

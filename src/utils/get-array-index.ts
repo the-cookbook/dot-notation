@@ -1,15 +1,15 @@
 /**
  * Ger Array Index
- * @description get array index from given string
+ * @description get array index from dot notation path string
  * @param {string} str
- * @return {string[]|null}
+ * @return {RegExpExecArray|null}
  */
 const getArrayIndex = (str: string): RegExpExecArray | null => {
-  return getArrayIndex.regexNaNIndex.exec(str) || getArrayIndex.regexIntegerIndex.exec(str);
+  return getArrayIndex.regexpNaNIndex.exec(str) || getArrayIndex.regexpIntIndex.exec(str);
 };
 
-getArrayIndex.regexIntegerIndex = /\[([-]*\d*)\]/g;
+getArrayIndex.regexpIntIndex = /\[(-*\d*)]/g;
 
-getArrayIndex.regexNaNIndex = /\[([^\]]*)\]/;
+getArrayIndex.regexpNaNIndex = /\[([^\]]*)]/;
 
 export default getArrayIndex;

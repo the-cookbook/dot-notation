@@ -55,6 +55,7 @@ describe('utils/getKey()', () => {
 
     Object.keys(expectations).forEach((path) => {
       it(`should parse "${path} accordingly`, () => {
+        // console.table(dotNotationPath(path));
         expect(getKey(path)).toStrictEqual(expectations[path]);
       });
     });

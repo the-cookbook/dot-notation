@@ -9,7 +9,7 @@ import getKey from './get-key';
 const createPathBreadcrumb = (path: string): string[] => {
   return (
     path
-      .split(getKey.regex)
+      .split(getKey.regexp)
       .filter(Boolean)
       // add default index for empty array notation
       .map((p) => (p === '[]' ? '[0]' : p))

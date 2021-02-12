@@ -5,11 +5,11 @@
  * @returns {[string, string | undefined]} - returns key, remaining dot notation path and isArray,
  */
 const getKey = (value: string): [string, string | undefined] => {
-  const [current, ...remaining] = value.split(getKey.regex).filter(Boolean);
+  const [current, ...remaining] = value.split(getKey.regexp).filter(Boolean);
 
   return [current, remaining.length ? remaining.join('.') : undefined];
 };
 
-getKey.regex = /\.|(\[[^\]]*\])|(\[[-]*\d*\])/;
+getKey.regexp = /\.|(\[[^\]]*])|(\[-*\d*])/;
 
 export default getKey;

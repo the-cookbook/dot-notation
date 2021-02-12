@@ -7,11 +7,11 @@ describe('utils/merge()', () => {
 
   describe('exceptions', () => {
     it('should merge uneven objects', () => {
-      const leftSide = {
+      const lhs = {
         hobbies: ['barbecue'],
       };
 
-      const rightSide = {
+      const rhs = {
         hobbies: ['movie', 'coding'],
       };
 
@@ -19,78 +19,85 @@ describe('utils/merge()', () => {
         hobbies: ['movie', 'coding'],
       };
 
-      expect(merge<Record<string, unknown>>(leftSide, rightSide)).toStrictEqual(expects);
+      expect(merge(lhs, rhs)).toStrictEqual(expects);
     });
   });
 
   describe('object', () => {
     it('should return merge objects accordingly', () => {
-      const leftSide = { name: 'John' };
-      const rightSide = { lastName: 'Doe' };
+      const lhs = { name: 'John' };
+      const rhs = { lastName: 'Doe' };
 
-      const expects = { ...leftSide, ...rightSide };
+      const expects = { ...lhs, ...rhs };
 
-      expect(merge<Record<string, unknown>>(leftSide, rightSide)).toStrictEqual(expects);
+      expect(merge(lhs, rhs)).toStrictEqual(expects);
     });
 
     it('should merge deep object', () => {
-      const leftSide = { earth: { human: { person: { name: 'John' } } } };
-      const rightSide = { earth: { human: { person: { lastName: 'Doe' } } } };
+      const lhs = { earth: { human: { person: { name: 'John' } } } };
+      const rhs = { earth: { human: { person: { lastName: 'Doe' } } } };
 
       const expects = { earth: { human: { person: { name: 'John', lastName: 'Doe' } } } };
 
-      expect(merge<Record<string, unknown>>(leftSide, rightSide)).toStrictEqual(expects);
+      expect(merge(lhs, rhs)).toStrictEqual(expects);
     });
   });
 
   describe('array', () => {
     describe('pure array data type', () => {
       it('should always replace from the right side value', () => {
-        const leftSide = [1, 2, 3];
-        const rightSide = [4, 5, 6];
+        const lhs = [1, 2, 3];
+        const rhs = [4, 5, 6];
 
-        expect(merge(leftSide, rightSide)).toStrictEqual(rightSide);
+        expect(merge(lhs, rhs)).toStrictEqual(rhs);
       });
     });
+
     describe('nested data type', () => {
       it('should always replace from the right side value', () => {
-        const leftSide = {
+        const lhs = {
           collection: ['books'],
           hobbies: ['barbecue'],
         };
 
-        const rightSide = {
+        const rhs = {
           preferences: ['email'],
-          hobbies: ['movie', 'coding'],
+          hobbies: { favourite: 'coding' },
         };
 
         const expects = {
           collection: ['books'],
           preferences: ['email'],
-          hobbies: ['movie', 'coding'],
+          hobbies: { favourite: 'coding' },
         };
 
-        expect(merge<Record<string, unknown>>(leftSide, rightSide)).toStrictEqual(expects);
+        expect(merge(lhs, rhs)).toStrictEqual(expects);
       });
     });
   });
 
   describe('nested', () => {
     it('should merge simple nested object array', () => {
-      const leftSide = { name: 'John', hobbies: ['barbecue'] };
-      const rightSide = { lastName: 'Doe', hobbies: ['movie'] };
+      interface NestedSource {
+        name: string;
+        lastName: string;
+        hobbies: string[];
+      }
 
-      const expects = { name: 'John', lastName: 'Doe', hobbies: ['movie'] };
+      const lhs: Partial<NestedSource> = { name: 'John', hobbies: ['barbecue'] };
+      const rhs: Partial<NestedSource> = { lastName: 'Doe', hobbies: ['movie'] };
 
-      expect(merge(leftSide, rightSide)).toStrictEqual(expects);
+      const expects: NestedSource = { name: 'John', lastName: 'Doe', hobbies: ['movie'] };
+
+      expect(merge<NestedSource>(lhs, rhs)).toStrictEqual(expects);
     });
 
     it('should merge complex nested object array', () => {
-      const leftSide = {
+      const lhs = {
         person: { name: 'John', random: ['bacon', 1, { language: 'javascript' }, true] },
       };
 
-      const rightSide = {
+      const rhs = {
         person: { lastName: 'Doe', random: ['cheeseburger', 2, { ide: 'webstorm' }, false] },
       };
 
@@ -102,7 +109,7 @@ describe('utils/merge()', () => {
         },
       };
 
-      expect(merge<Record<string, unknown>>(leftSide, rightSide)).toStrictEqual(expects);
+      expect(merge(lhs, rhs)).toStrictEqual(expects);
     });
   });
 });

@@ -1,12 +1,13 @@
+import toArray from './to-array';
+
 /**
- * Replace
- * @description replaces string search values
+ * Replace search values from string
  * @param {string} source
- * @param {string[]} searchValues
+ * @param {string | string[]} searchValues
  * @param {string} replaceWith
  * @returns {string}
  */
-const replace = (source: string, searchValues: string[], replaceWith: string): string =>
-  searchValues.reduce((raw, value) => raw.replace(value, replaceWith), source);
+const replace = (source: string, searchValues: string | string[], replaceWith: string): string =>
+  toArray(searchValues).reduce((raw, value) => raw.replace(value, replaceWith), source);
 
 export default replace;

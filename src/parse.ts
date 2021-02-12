@@ -4,8 +4,9 @@ import getArrayIndex from './utils/get-array-index';
 import is from './utils/is';
 import merge from './utils/merge';
 import createPathBreadcrumb from './utils/create-path-breadcrumb';
+import shallowCopy from './utils/shallow-copy';
 
-const compile = (
+const compileEntry = (
   source: Record<string, unknown> | unknown[],
   instructions: string[],
   value: unknown,
@@ -29,7 +30,7 @@ const compile = (
   } else {
     const hasChild = instructions.length > 1;
 
-    const result = hasChild ? compile((data as unknown[])[+idx] as unknown[], instructions.slice(1), value) : value;
+    const result = hasChild ? compileEntry(data[+idx] as unknown[], instructions.slice(1), value) : value;
 
     if (is.object(result)) {
       data[+idx] = { ...result };
@@ -46,29 +47,29 @@ const compile = (
 /**
  * Parse object from dot notation
  * @template T
- * @param {object} source - Dot notation object
- * @returns {object}
- * @param source
+ * @param {Object.<string, unknown>} source
  * @return {T|T[]}
  */
 const parse = <T>(source: Record<string, unknown>): T extends [] ? T[] : T => {
-  const paths = Object.keys(source);
+  const content = shallowCopy(source);
 
-  let result: unknown = getArrayIndex(createPathBreadcrumb(paths[0])[0]) ? [] : {};
+  const paths = Object.keys(content);
+
+  let result = getArrayIndex(createPathBreadcrumb(paths[0])[0]) ? [] : {};
 
   for (let i = 0; i < paths.length; i += 1) {
     const path = paths[i];
     const hasArrayNotation = getArrayIndex(path);
-    const value = source[path];
+    const value = shallowCopy(content[path]);
 
     let parsedValue = parseKey(path, value);
 
     if (hasArrayNotation) {
       const commonPath = path.substr(0, hasArrayNotation.index);
       const workingPath = createPathBreadcrumb(path.replace(commonPath, ''));
-      const workingNode: unknown[] = commonPath ? pick(result, commonPath) || [] : (result as unknown[]);
+      const workingNode = commonPath ? pick<unknown[]>(result, commonPath) || [] : result;
 
-      parsedValue = compile(workingNode, workingPath, value);
+      parsedValue = compileEntry(workingNode, workingPath, value);
 
       if (commonPath) {
         parsedValue = parseKey(commonPath, parsedValue);
@@ -79,10 +80,7 @@ const parse = <T>(source: Record<string, unknown>): T extends [] ? T[] : T => {
       result = parsedValue;
     }
 
-    result = merge<Record<string, unknown>>(
-      result as Partial<Record<string, unknown>>,
-      parsedValue as Partial<Record<string, unknown>>,
-    );
+    result = merge(result, parsedValue);
   }
 
   return result as T extends [] ? T[] : T;

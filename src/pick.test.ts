@@ -87,7 +87,14 @@ describe('pick()', () => {
       expect(pick(source, pathHasATypo)).toBe(undefined);
     });
 
-    const expects: Record<string, unknown> = {
+    it('should return undefined when source is not an object nor array', () => {
+      const content = 'hello world';
+      const path = 'greeting';
+
+      expect(pick(content, path)).toBeUndefined();
+    });
+
+    const expects = {
       array: source.array,
       'array.[0]': source.array[0],
       'array.[0].[0]': source.array[0][0],
@@ -107,7 +114,7 @@ describe('pick()', () => {
   });
 
   describe('object path', () => {
-    const expects: Record<string, unknown> = {
+    const expects = {
       person: source.person,
       'person.name': source.person.name,
       'person.name.firstName': source.person.name.firstName,
@@ -126,7 +133,7 @@ describe('pick()', () => {
   });
 
   describe('array path', () => {
-    const expects: Record<string, unknown> = {
+    const expects = {
       array: source.array,
       'array[0]': source.array[0],
       'array[0][0]': source.array[0][0],
@@ -144,7 +151,7 @@ describe('pick()', () => {
       });
     });
 
-    const expectsArray: Record<string, unknown> = {
+    const expectsArray = {
       '[0]': array[0],
       '[0][0]': array[0][0],
       '[0][0][0]': array[0][0][0],
@@ -163,7 +170,7 @@ describe('pick()', () => {
   });
 
   describe('nested path', () => {
-    const paths: Record<string, unknown> = {
+    const paths = {
       'person.address[0]': source.person.address[0],
       'person.address[0].postalCode': source.person.address[0].postalCode,
       'person.address[1]': source.person.address[1],
