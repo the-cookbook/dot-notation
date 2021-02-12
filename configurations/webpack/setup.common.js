@@ -20,11 +20,12 @@ module.exports = {
   },
   target: 'web',
   optimization: {
-    namedModules: true,
-    noEmitOnErrors: true,
-    concatenateModules: true,
+    emitOnErrors: false,
+    removeAvailableModules: false,
+    runtimeChunk: true,
     minimizer: [
       new TerserJSPlugin({
+        parallel: true,
         terserOptions: {
           warnings: false,
           compress: {
@@ -37,32 +38,17 @@ module.exports = {
             beautify: false,
           },
         },
-        sourceMap: true,
-        parallel: true,
-        cache: false,
       }),
     ],
     splitChunks: {
       chunks: 'all',
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-          minChunks: 2,
-        },
-        default: {
-          minChunks: 2,
-          reuseExistingChunk: true,
-        },
-      },
     },
   },
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: `./${appSource}/assets/favicon/*`, to: '', flatten: true },
-        { from: `./${appSource}/assets/css/*`, to: 'css', flatten: true },
+        { from: `./${appSource}/assets/favicon/*`, to: '[name].[ext]' },
+        { from: `./${appSource}/assets/css/*`, to: 'css/[name].[ext]' },
       ],
     }),
     new HtmlWebpackPlugin({

@@ -27,7 +27,7 @@ const SourceCode: React.FunctionComponent<SourceCode> = (props: SourceCode) => {
     updateJSONValidation(isValid);
 
     if (isValid) {
-      onChange(JSON.parse(value))
+      onChange(value)
     }
   }
 

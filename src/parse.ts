@@ -10,11 +10,11 @@ const compileEntry = (
   source: Record<string, unknown> | unknown[],
   instructions: string[],
   value: unknown,
-): Record<string, unknown> | unknown[] => {
+): Record<string, unknown> | Array<unknown> => {
   const data = is.array(source) ? [...source] : { ...source };
 
   if (is.object(data)) {
-    return merge(data, parseKey(instructions.join('.'), value) as Partial<Record<string, unknown>>);
+    return merge(data, parseKey<Record<string, unknown>>(instructions.join('.'), value));
   }
 
   const { 1: idx, index } = getArrayIndex(instructions.join('.'));
@@ -26,7 +26,7 @@ const compileEntry = (
   }
 
   if (is.nullOrUndefined(data[+idx])) {
-    data.push(...(parseKey(instructions.splice(index).join('.'), value) as unknown[]));
+    data.push(...parseKey<unknown[]>(instructions.splice(index).join('.'), value));
   } else {
     const hasChild = instructions.length > 1;
 

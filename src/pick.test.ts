@@ -14,6 +14,7 @@ const array: RecursiveObject = [
   ],
 ];
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 const source: RecursiveObject = {
   person: {
     name: {
@@ -184,3 +185,4 @@ describe('pick()', () => {
     });
   });
 });
+/* eslint-enable @typescript-eslint/no-unsafe-assignment */

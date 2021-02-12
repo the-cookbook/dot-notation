@@ -9,7 +9,7 @@ const PORT = process.env.PORT || '3300';
 
 module.exports = {
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-cheap-source-map',
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../../public'),
@@ -44,7 +44,6 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: '"development"' },
     }),
