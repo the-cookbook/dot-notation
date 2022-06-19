@@ -8,7 +8,7 @@ const appSource = 'demo';
 
 module.exports = {
   entry: {
-    app: ['core-js', 'react-hot-loader/patch', `./${appSource}/application.tsx`],
+    app: ['core-js/stable', 'react-hot-loader/patch', `./${appSource}/application.tsx`],
   },
   resolve: {
     mainFields: ['browser', 'module', 'main'],
@@ -47,13 +47,15 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: `./${appSource}/assets/favicon/*`, to: '[name].[ext]' },
-        { from: `./${appSource}/assets/css/*`, to: 'css/[name].[ext]' },
+        { from: `./demo/assets/favicon/*`, to: '[name][ext]' },
+        { from: `./demo/assets/css/*`, to: 'css/[name][ext]' },
       ],
+      options: { concurrency: 100 },
     }),
     new HtmlWebpackPlugin({
       template: './demo/index.html',
       title: app.name,
+      inject: true,
       minify: {
         collapseWhitespace: true,
         preserveLineBreaks: false,

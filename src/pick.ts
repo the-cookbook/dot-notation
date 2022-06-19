@@ -2,6 +2,7 @@ import getArrayIndex from './utils/get-array-index';
 import getKey from './utils/get-key';
 import is from './utils/is';
 import shallowCopy from './utils/shallow-copy';
+import type { DotNotationPathOf, DotNotationDataTypeOf } from './contracts';
 
 /**
  * Pick value at a given dot notation path
@@ -10,15 +11,18 @@ import shallowCopy from './utils/shallow-copy';
  * @param {string} path
  * @returns {T} value
  */
-const pick = <T>(source: Record<string, unknown> | Array<Record<string, unknown>>, path: string): T => {
-  if (is.nullOrUndefined(path) || !path.trim()) {
+const pick = <T extends object | Array<object>, K extends DotNotationPathOf<T> | string>(
+  source: T,
+  path: K,
+): DotNotationDataTypeOf<T, K> => {
+  if (is.nullish(path) || !path.toString().trim()) {
     throw new SyntaxError(`A dot notation path was expected, but instead got "${path}"`);
   }
 
-  const content = shallowCopy(source) as Record<string, unknown>;
+  const content = shallowCopy(source) as T;
 
   // eslint-disable-next-line prefer-const
-  let [key, remainingPath]: [string | number, string | undefined] = getKey(path);
+  let [key, remainingPath] = getKey(path) as [string | number, K];
 
   const hasArrayNotation = getArrayIndex(key.toString());
 
@@ -41,11 +45,13 @@ const pick = <T>(source: Record<string, unknown> | Array<Record<string, unknown>
     key = +idx;
   }
 
-  if (!remainingPath || is.nullOrUndefined(content[key])) {
+  // @ts-ignore
+  if (!remainingPath || is.nullish(content[key])) {
+    // @ts-ignore
     return content[key] as T;
   }
 
-  return pick<T>(content[key] as Record<string, unknown>, remainingPath);
+  return pick(content[key], remainingPath) as DotNotationDataTypeOf<T, K>;
 };
 
 export default pick;

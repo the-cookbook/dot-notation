@@ -14,7 +14,7 @@ const shallowCopy = <T>(value: T): T extends [] ? T[] : T => {
   } else if (is.object(value)) {
     copy = { ...value };
   } else if (typeOf(value) === 'date') {
-    copy = new Date((value as unknown) as Date);
+    copy = new Date(value as unknown as Date);
   } else {
     copy = value;
   }

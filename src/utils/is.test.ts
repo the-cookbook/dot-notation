@@ -5,12 +5,12 @@ describe('utils/is', () => {
     expect(is).toMatchSnapshot();
   });
 
-  describe('is.nullOrUndefined()', () => {
+  describe('is.nullish()', () => {
     it('should flag data type correctly', () => {
-      expect(is.nullOrUndefined(null)).toBe(true);
-      expect(is.nullOrUndefined(undefined)).toBe(true);
-      expect(is.nullOrUndefined('')).toBe(false);
-      expect(is.nullOrUndefined('123')).toBe(false);
+      expect(is.nullish(null)).toBe(true);
+      expect(is.nullish(undefined)).toBe(true);
+      expect(is.nullish('')).toBe(false);
+      expect(is.nullish('123')).toBe(false);
     });
   });
 

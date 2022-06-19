@@ -9,6 +9,7 @@ const global = [...Object.keys(pkg.dependencies)];
 
 module.exports = {
   input: './lib/index.js',
+  exports: 'named',
   output: {
     file: `lib/${pkgName}.min.js`,
     format: 'umd',

@@ -11,6 +11,6 @@ const typeOf = (value: unknown | unknown[]): string =>
   ({}.toString
     .call(value)
     .match(/\s([A-Za-z]+)/)[1]
-    .toLowerCase() as string);
+    .toLowerCase());
 
 export default typeOf;

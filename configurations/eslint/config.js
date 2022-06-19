@@ -46,10 +46,9 @@ module.exports = {
     'plugin:react/recommended',
     'eslint-config-prettier',
     'prettier',
-    'prettier/react',
-    'prettier/@typescript-eslint',
   ],
   rules: {
+    '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/explicit-function-return-type': [
       'error',
       { allowExpressions: true, allowTypedFunctionExpressions: true },

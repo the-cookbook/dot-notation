@@ -32,7 +32,7 @@ yarn add @cookbook/dot-notation
 ### Picking a value
 
 ```js
-import dot from '@cookbook/dot-notation';
+import { pick } from '@cookbook/dot-notation';
 
 const source = {
   person: {
@@ -52,10 +52,10 @@ const source = {
   }
 };
 
-dot.pick(source, 'person.name');
+pick(source, 'person.name');
 //output { firstName: 'John', lastName: 'Doe' }
 
-dot.pick(source, 'person.address[0].street');
+pick(source, 'person.address[0].street');
 //output "Infinite Loop"
 ```
 
@@ -64,7 +64,7 @@ dot.pick(source, 'person.address[0].street');
 #### Conventional parsing
 
 ```js
-import dot from '@cookbook/dot-notation';
+import { parse } from '@cookbook/dot-notation';
 
 const source = {
   'person.name.firstName': 'John',
@@ -74,7 +74,7 @@ const source = {
   'person.address[].postalCode': 95014,
 };
 
-dot.parse(source);
+parse(source);
 
 /* output
 {
@@ -100,7 +100,7 @@ dot.parse(source);
 > where `[n]` represents the array index position to insert the element
 
 ```js
-import dot from '@cookbook/dot-notation';
+import { parse } from '@cookbook/dot-notation';
 
 const source = {
   '[0].street': 'Infinite Loop',
@@ -114,7 +114,7 @@ const source = {
   '[2][1][1]': ['gaming'],
 };
 
-dot.parse(source);
+parse(source);
 
 /* output
 [
@@ -140,12 +140,12 @@ dot.parse(source);
 
 
 ```js
-import dot from '@cookbook/dot-notation';
+import { parseKey } from '@cookbook/dot-notation';
 
 const path = 'person.name';
 const value = 'John Doe';
 
-dot.parseKey(path, value);
+parseKey(path, value);
 
 /* output
 {

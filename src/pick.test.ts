@@ -1,9 +1,6 @@
 import pick from './pick';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type RecursiveObject = any;
-
-const array: RecursiveObject = [
+const array = [
   [[['foo']]],
   [
     {
@@ -15,7 +12,7 @@ const array: RecursiveObject = [
 ];
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-const source: RecursiveObject = {
+const source = {
   person: {
     name: {
       firstName: 'John',
