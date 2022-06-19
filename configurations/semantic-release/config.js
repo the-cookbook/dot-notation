@@ -6,8 +6,8 @@ module.exports = {
     { name: 'beta', channel: 'beta', prerelease: 'beta' },
   ],
   plugins: [
-    '@semantic-release/commit-analyzer',
-    '@semantic-release/release-notes-generator',
+    ['@semantic-release/commit-analyzer', { preset: 'angular' }],
+    ['@semantic-release/release-notes-generator', { preset: 'angular' }],
     [
       '@semantic-release/npm',
       {
@@ -25,7 +25,7 @@ module.exports = {
       '@semantic-release/git',
       {
         message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
-        assets: ['CHANGELOG.md', 'package.json', 'yarn.lock', 'npm-shrinkwrap.json']
+        assets: ['CHANGELOG.md', 'package.json', 'yarn.lock', 'npm-shrinkwrap.json'],
       },
     ],
   ],
