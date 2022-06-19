@@ -73,6 +73,9 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          name: Set git upstream
+          command: git branch --set-upstream-to origin/${CIRCLE_BRANCH}
+      - run:
           name: Running semantic-release workflow
           command: npx semantic-release
       - store_artifacts:
