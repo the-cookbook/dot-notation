@@ -20,19 +20,20 @@ module.exports = {
     rules,
   },
   devServer: {
-    contentBase: './public',
-    noInfo: true,
-    hot: true,
-    inline: true,
-    watchContentBase: true,
+    static: {
+      directory: path.join(__dirname, '../../public'),
+      watch: true,
+    },
+    compress: false,
+    liveReload: true,
     historyApiFallback: true,
-    disableHostCheck: true,
+    hot: true,
     open: true,
     port: PORT,
     host: HOST,
   },
   performance: {
-    hints: 'warning',
+    hints: false,
     maxAssetSize: 512000,
     maxEntrypointSize: 8500000,
     assetFilter: function (assetFilename) {
