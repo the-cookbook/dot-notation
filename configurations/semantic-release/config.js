@@ -9,6 +9,12 @@ module.exports = {
     ['@semantic-release/commit-analyzer', { preset: 'angular' }],
     ['@semantic-release/release-notes-generator', { preset: 'angular' }],
     [
+      '@semantic-release/changelog',
+      {
+        changelogFile: 'CHANGELOG.md',
+      },
+    ],
+    [
       '@semantic-release/npm',
       {
         tarballDir: 'release',
@@ -18,7 +24,11 @@ module.exports = {
     [
       '@semantic-release/github',
       {
-        assets: [{ path: 'release/*.tgz' }, { path: `lib/dot.min.js*(.map)`, label: 'UMD build minified' }],
+        assets: [
+          { path: 'release/*.tgz' },
+          { path: `lib/dot.min.js*(.map)`, label: 'UMD build minified' },
+          { path: 'CHANGELOG.md' },
+        ],
       },
     ],
     [
