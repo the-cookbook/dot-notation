@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "authors": "node ./scripts/authors.js",
-    "postinstall": "yarn husky install && npm run build && npm run authors",
+    "prepare": "yarn husky install && npm run build && npm run authors",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "postversion": "git push && git push --tags",
