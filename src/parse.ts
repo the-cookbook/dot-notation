@@ -7,14 +7,14 @@ import createPathBreadcrumb from './utils/create-path-breadcrumb';
 import shallowCopy from './utils/shallow-copy';
 
 const compileEntry = (
-  source: Record<string, unknown> | unknown[],
+  source: object | Array<unknown>,
   instructions: string[],
   value: unknown,
 ): Record<string, unknown> | Array<unknown> => {
-  const data = is.array(source) ? [...source] : { ...source };
+  const data = shallowCopy(source);
 
-  if (is.object(data)) {
-    return merge(data, parseKey<Record<string, unknown>>(instructions.join('.'), value));
+  if (!is.array(data)) {
+    return merge(data, parseKey<object>(instructions.join('.'), value)) as Record<string, unknown>;
   }
 
   const { 1: idx, index } = getArrayIndex(instructions.join('.'));
@@ -25,17 +25,17 @@ const compileEntry = (
     );
   }
 
-  if (is.nullOrUndefined(data[+idx])) {
+  if (is.nullish(data[+idx])) {
     data.push(...parseKey<unknown[]>(instructions.splice(index).join('.'), value));
   } else {
     const hasChild = instructions.length > 1;
 
-    const result = hasChild ? compileEntry(data[+idx] as unknown[], instructions.slice(1), value) : value;
+    const result: unknown = hasChild ? compileEntry(data[+idx] as Array<unknown>, instructions.slice(1), value) : value;
 
     if (is.object(result)) {
       data[+idx] = { ...result };
     } else if (is.array(result)) {
-      data[+idx] = [...result];
+      data[+idx] = [...(result as Array<unknown>)];
     } else {
       data[+idx] = result;
     }
@@ -50,8 +50,8 @@ const compileEntry = (
  * @param {Object.<string, unknown>} source
  * @return {T|T[]}
  */
-const parse = <T>(source: Record<string, unknown>): T extends [] ? T[] : T => {
-  const content = shallowCopy(source);
+const parse = <T extends object>(source: object): T extends [] ? T[] : T => {
+  const content = shallowCopy(source) as Record<string, unknown>;
 
   const paths = Object.keys(content);
 
@@ -65,9 +65,9 @@ const parse = <T>(source: Record<string, unknown>): T extends [] ? T[] : T => {
     let parsedValue = parseKey(path, value);
 
     if (hasArrayNotation) {
-      const commonPath = path.substr(0, hasArrayNotation.index);
+      const commonPath = path.substring(0, hasArrayNotation.index);
       const workingPath = createPathBreadcrumb(path.replace(commonPath, ''));
-      const workingNode = commonPath ? pick<unknown[]>(result, commonPath) || [] : result;
+      const workingNode = commonPath ? pick(result, commonPath) || [] : result;
 
       parsedValue = compileEntry(workingNode, workingPath, value);
 

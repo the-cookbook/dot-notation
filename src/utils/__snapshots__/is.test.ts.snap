@@ -3,7 +3,9 @@
 exports[`utils/is should match snapshot 1`] = `
 Object {
   "array": [Function],
-  "nullOrUndefined": [Function],
+  "nullish": [Function],
+  "number": [Function],
   "object": [Function],
+  "string": [Function],
 }
 `;
