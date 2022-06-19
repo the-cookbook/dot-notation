@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/the-cookbook/dot-notation/compare/v2.0.0...v2.0.1) (2022-06-19)
+
+
+### Bug Fixes
+
+* **package.json:** switch from "postinstall" to "prepare" ([6bb741e](https://github.com/the-cookbook/dot-notation/commit/6bb741e5a4404d9b100f71c2d5da1dd61c1bd23f))
+
 # [2.0.0](https://github.com/the-cookbook/dot-notation/compare/v1.2.0...v2.0.0) (2022-06-19)
 
 
