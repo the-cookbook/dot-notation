@@ -14,7 +14,6 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "ESNext",
     "moduleResolution": "Node",
-    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
